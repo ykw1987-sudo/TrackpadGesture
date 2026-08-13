@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrackpadGesture — 讓 Mac 觸控板更強大的手勢工具</title>
+    <style>
+        :root {
+            --bg-primary: #000000;
+            --bg-secondary: #1c1c1e;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --text-primary: #f5f5f7;
+            --text-secondary: #86868b;
+            --accent-blue: #2997ff;
+            --accent-blue-hover: #0077ed;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-stack);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 導覽列 Nav */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+        }
+
+        .logo {
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .lang-switch {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .lang-switch:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* 主視覺區 Hero Section */
+        .hero {
+            padding: 180px 1.5rem 100px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(41, 151, 255, 0.1);
+            color: var(--accent-blue);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(41, 151, 255, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            margin-bottom: 1rem;
+            background: linear-gradient(180deg, #ffffff 0%, #a1a1a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.35rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 980px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-blue);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-blue-hover);
+            transform: scale(1.02);
+        }
+
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: scale(1.02);
+        }
+
+        .trial-note {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.8rem;
+        }
+
+        /* 模組卡片格 Section */
+        .section-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 1.5rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            letter-spacing: -0.5px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 2rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* UI 手勢展示卡片 (展示 APP 運作邏輯) */
+        .demo-box {
+            background: linear-gradient(145deg, #18181a, #0d0d0e);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .gesture-demo {
+            display: flex;
+            gap: 3rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .gesture-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            min-width: 220px;
+        }
+
+        .gesture-icon {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-blue);
+        }
+
+        /* 系統需求 */
+        .specs-list {
+            list-style: none;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .specs-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-secondary);
+        }
+
+        .specs-list li span:last-child {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* 頁尾 Footer */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 40px 1.5rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-top: 80px;
+        }
+
+        /* 響應式微調 */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
+            .cta-buttons { flex-direction: column; width: 100%; }
+            .btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 頂部導覽列 -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74zM18 10h-1.26c-.39 2.12-1.89 3.86-3.87 4.54V19h3c1.66 0 3-1.34 3-3v-6z"/></svg>
+                TrackpadGesture
+            </div>
+            <button class="lang-switch" onclick="toggleLanguage()" id="langBtn">English</button>
+        </div>
+    </header>
+
+    <!-- 主視覺區 -->
+    <section class="hero">
+        <div class="hero-badge" data-zh="專為 macOS 精心打造" data-en="Crafted for macOS">專為 macOS 精心打造</div>
+        <h1 data-zh="讓你的 Mac 觸控板<br>極速進化" data-en="Elevate Your Mac<br>Trackpad Experience">讓你的 Mac 觸控板<br>極速進化</h1>
+        <p data-zh="只需雙指邊緣滑動，無縫觸發複製與貼上。解放你的工作流程。" data-en="Seamlessly copy and paste with intuitive edge gestures. Streamline your workflow instantly.">只需雙指邊緣滑動，無縫觸發複製與貼上。解放你的工作流程。</p>
+        
+        <div class="cta-buttons">
+            <a href="#" class="btn btn-primary" data-zh="免費下載（試用 60 天）" data-en="Free Download (60-Day Trial)">免費下載（試用 60 天）</a>
+            <a href="#" class="btn btn-secondary" data-zh="立即購買授權" data-en="Buy License Now">立即購買授權</a>
+        </div>
+        <div class="trial-note" data-zh="試用說明：下載後可完整使用 60 天。期滿需購買授權。" data-en="Trial Note: Enjoy full functionality for 60 days. License required afterwards.">試用說明：下載後可完整使用 60 天。期滿需購買授權。</div>
+    </section>
+
+    <!-- 核心功能特點 -->
+    <section class="section-container">
+        <h2 class="section-title" data-zh="主要功能與特色" data-en="Key Features">主要功能與特色</h2>
+        
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">⚡️</div>
+                <h3 data-zh="觸控板右側極速觸發" data-en="Edge Trigger Zone">觸控板右側極速觸發</h3>
+                <p data-zh="將雙指移動至觸控板最右側（>86% 區域），直覺輕劃即可完成剪貼簿操作，毫不干擾日常滑動。" data-en="Move two fingers to the right edge (>86% area) to trigger actions effortlessly without accidental scrolls.">將雙指移動至觸控板最右側（>86% 區域），直覺輕劃即可完成剪貼簿操作，毫不干擾日常滑動。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📋</div>
+                <h3 data-zh="直覺手勢：複製與貼上" data-en="Intuitive Gestures">直覺手勢：複製與貼上</h3>
+                <p data-zh="雙指邊緣向上滑動即時「貼上」，向下滑動即時「複製」。徹底告別 ⌘+C / ⌘+V 繁瑣組合鍵。" data-en="Swipe UP to Paste, Swipe DOWN to Copy. Say goodbye to awkward Cmd+C / Cmd+V key combos.">雙指邊緣向上滑動即時「貼上」，向下滑動即時「複製」。徹底告別 ⌘+C / ⌘+V 繁瑣組合鍵。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔔</div>
+                <h3 data-zh="原生 HUD 與觸覺回饋" data-en="HUD & Haptic Feedback">原生 HUD 與觸覺回饋</h3>
+                <p data-zh="觸發時提供 Mac 系統級觸覺震動，並在游標旁顯示清晰精美的微型 HUD 浮動圖示。" data-en="Provides native Taptic Engine feedback and displays a sleek HUD icon near your cursor upon trigger.">觸發時提供 Mac 系統級觸覺震動，並在游標旁顯示清晰精美的微型 HUD 浮動圖示。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🛡️</div>
+                <h3 data-zh="防誤觸與智能凍結" data-en="Smart Scroll Suppression">防誤觸與智能凍結</h3>
+                <p data-zh="內建 Multitouch 私有底層框架優化，觸發手勢時自動壓制網頁滾動，離開左側 zone 瞬間即時解凍。" data-en="Prevents unwanted page scrolling during gesture execution with real-time zone detection logic.">內建 Multitouch 私有底層框架優化，觸發手勢時自動壓制網頁滾動，離開左側 zone 瞬間即時解凍。</p>
+            </div>
+        </div>
+
+        <!-- 手勢示範展示區 -->
+        <div class="demo-box">
+            <h3 style="font-size: 1.5rem; font-weight: 600;" data-zh="如何使用 TrackpadGesture" data-en="How It Works">如何使用 TrackpadGesture</h3>
+            <p style="color: var(--text-secondary); margin-top: 8px;" data-zh="將雙指移動至觸控板最右側區域並滑動：" data-en="Move two fingers to the far right side of the trackpad:">將雙指移動至觸控板最右側區域並滑動：</p>
+            
+            <div class="gesture-demo">
+                <div class="gesture-item">
+                    <div class="gesture-icon">👉 👆</div>
+                    <strong data-zh="向上輕劃" data-en="Swipe Up">向上輕劃</strong>
+                    <span style="color: var(--accent-blue); font-weight: 600;" data-zh="執行貼上 (Paste)" data-en="Paste (⌘V)">執行貼上 (Paste)</span>
+                </div>
+                <div class="gesture-item">
+                    <div class="gesture-icon">👉 👇</div>
+                    <strong data-zh="向下輕劃" data-en="Swipe Down">向下輕劃</strong>
+                    <span style="color: var(--accent-blue); font-weight: 600;" data-zh="執行複製 (Copy)" data-en="Copy (⌘C)">執行複製 (Copy)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 系統需求與安全 -->
+    <section class="section-container">
+        <h2 class="section-title" data-zh="系統需求與安全性" data-en="System Requirements & Security">系統需求與安全性</h2>
+        <ul class="specs-list">
+            <li>
+                <span data-zh="作業系統" data-en="Operating System">作業系統</span>
+                <span>macOS 13.0 (Ventura) 或更新版本</span>
+            </li>
+            <li>
+                <span data-zh="晶片架構" data-en="Architecture">晶片架構</span>
+                <span>原生支援 Apple Silicon (M1/M2/M3/M4) 及 Intel 處理器</span>
+            </li>
+            <li>
+                <span data-zh="安全公證" data-en="Apple Notarization">安全公證</span>
+                <span data-zh="已使用 Developer ID 簽名並通過 Apple 公證" data-en="Developer ID Signed & Apple Notarized">已使用 Developer ID 簽名並通過 Apple 公證</span>
+            </li>
+            <li>
+                <span data-zh="系統權限" data-en="Permissions Required">系統權限</span>
+                <span data-zh="需開啟「輸入監控」與「輔助使用」" data-en="Input Monitoring & Accessibility">需開啟「輸入監控」與「輔助使用」</span>
+            </li>
+        </ul>
+    </section>
+
+    <!-- 頁尾 -->
+    <footer>
+        <p>© 2026 Kai Wa Yuen. All rights reserved.</p>
+    </footer>
+
+    <!-- 切換語言腳本 -->
+    <script>
+        let currentLang = 'zh';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            document.getElementById('langBtn').innerText = currentLang === 'zh' ? 'English' : '中文';
+            
+            const elements = document.querySelectorAll('[data-zh]');
+            elements.forEach(el => {
+                el.innerHTML = el.getAttribute(`data-${currentLang}`);
+            });
+        }
+    </script>
+</body>
+</html>
