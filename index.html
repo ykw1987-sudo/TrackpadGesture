@@ -152,10 +152,15 @@
             transform: scale(1.02);
         }
 
-        .trial-note {
+        .trial-note, .price-note {
             font-size: 0.85rem;
             color: var(--text-secondary);
             margin-top: 0.8rem;
+        }
+
+        .price-note {
+            color: var(--text-primary);
+            font-weight: 600;
         }
 
         /* 模組卡片格 Section */
@@ -277,6 +282,27 @@
             margin-top: 80px;
         }
 
+        .legal-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .legal-links a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        .legal-links a:hover {
+            text-decoration: underline;
+        }
+
+        .support-note {
+            color: var(--text-secondary);
+        }
+
         /* 響應式微調 */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
@@ -310,6 +336,7 @@
             <a href="https://trackpadgesture.lemonsqueezy.com/checkout/buy/36b643a4-8795-401f-bde0-1d1b5eba67eb" class="btn btn-secondary" data-zh="立即購買授權" data-en="Buy License Now">立即購買授權</a>
         </div>
         <div class="trial-note" data-zh="試用說明：下載後可完整使用 45 天。期滿需購買授權。" data-en="Trial Note: Enjoy full functionality for 45 days. License required afterwards.">試用說明：下載後可完整使用 45 天。期滿需購買授權。</div>
+        <div class="price-note" data-zh="一次性授權：HK$79.90" data-en="One-time license: HK$79.90">一次性授權：HK$79.90</div>
     </section>
 
     <!-- 核心功能特點 -->
@@ -385,6 +412,12 @@
     <!-- 頁尾 -->
     <footer>
         <p>© 2026 Kai Wa Yuen. All rights reserved.</p>
+        <nav class="legal-links" aria-label="Legal">
+            <a href="terms.html" data-zh="服務條款" data-en="Terms of Service">服務條款</a>
+            <a href="privacy.html" data-zh="私隱政策" data-en="Privacy Policy">私隱政策</a>
+            <a href="refunds.html" data-zh="退款政策" data-en="Refund Policy">退款政策</a>
+        </nav>
+        <p class="support-note" data-zh="支援及退款查詢：請透過 GitHub Issues 聯絡我們。" data-en="For support and refund requests, please contact us through GitHub Issues.">支援及退款查詢：請透過 GitHub Issues 聯絡我們。</p>
     </footer>
 
     <!-- 切換語言腳本 -->
