@@ -33,9 +33,10 @@ A lightweight macOS menu bar app that lets you **Copy** and **Paste** using simp
 
 ## License
 
-- 60-day free trial included
-- Purchase a lifetime license here:  
-  [Buy License](https://trackpadgesture.lemonsqueezy.com/checkout/buy/36b643a4-8795-401f-bde0-1d1b5eba67eb)
+## 🛒 Purchase & License
+
+Try **TrackpadGesture** free for 45 days! To unlock unlimited lifetime access:
+  [Buy License](https://checkout.dodopayments.com/buy/pdt_0NmNnyLajCMVsGdCdXcnQ?quantity=1)
 
 After purchasing, open the app → click **Activate License** in the menu bar and paste your license key.
 
