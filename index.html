@@ -78,7 +78,7 @@
 
         /* 主視覺區 Hero Section */
         .hero {
-            padding: 180px 1.5rem 100px;
+            padding: 180px 1.5rem 60px;
             text-align: center;
             max-width: 800px;
             margin: 0 auto;
@@ -161,6 +161,62 @@
         .price-note {
             color: var(--text-primary);
             font-weight: 600;
+        }
+
+        /* 🔥 新增故事對比區塊 Story Section Styles */
+        .story-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 1.5rem;
+        }
+
+        .story-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .story-header {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            letter-spacing: -0.5px;
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            text-align: left;
+        }
+
+        .story-box {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .story-box.highlight {
+            border-color: rgba(41, 151, 255, 0.4);
+            background: rgba(41, 151, 255, 0.03);
+        }
+
+        .story-box h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .story-box p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
 
         /* 模組卡片格 Section */
@@ -309,6 +365,7 @@
             .hero p { font-size: 1.1rem; }
             .cta-buttons { flex-direction: column; width: 100%; }
             .btn { width: 100%; }
+            .story-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -337,6 +394,33 @@
         </div>
         <div class="trial-note" data-zh="試用說明：下載後可完整使用 45 天。期滿需購買授權。" data-en="Trial Note: Enjoy full functionality for 45 days. License required afterwards.">試用說明：下載後可完整使用 45 天。期滿需購買授權。</div>
         <div class="price-note" data-zh="一次性授權：HK$79.90" data-en="One-time license: HK$79.90">一次性授權：HK$79.90</div>
+    </section>
+
+    <!-- 🔥 新增：故事感官對比區塊 (Story Section) -->
+    <section class="story-container">
+        <div class="story-card">
+            <h2 class="story-header" data-zh="為真正的「單手自由」而生" data-en="Built for True One-Handed Freedom">為真正的「單手自由」而生</h2>
+            
+            <div class="story-grid">
+                <!-- 傳統舊方式 -->
+                <div class="story-box">
+                    <h4 data-zh="🥶 以前：雙手繁瑣操作" data-en="🥶 Before: Clumsy Two-Handed Moves">🥶 以前：雙手繁瑣操作</h4>
+                    <p data-zh="冬天窩在沙發或被窩看資料，右手滑著觸控板。但每當要複製貼上，左手就必須被逼抽出溫暖的被窩去按 ⌘+C / ⌘+V；或是左手拿著熱咖啡時，操作瞬間被年中斷。" 
+                       data-en="Curled up in bed on a chilly night? Every time you copy text, you're forced to pull your warm left hand out into the cold air just to hit Cmd+C / Cmd+V. Holding a coffee? Operations halt completely.">
+                       冬天窩在沙發或被窩看資料，右手滑著觸控板。但每當要複製貼上，左手就必須被逼抽出溫暖的被窩去按 ⌘+C / ⌘+V；或是左手拿著熱咖啡時，操作瞬間被年中斷。
+                    </p>
+                </div>
+                
+                <!-- TrackpadGesture 新方式 -->
+                <div class="story-box highlight">
+                    <h4 data-zh="🔥 現在：極致單手掌控" data-en="🔥 Now: Seamless Single-Hand Control">🔥 現在：極致單手掌控</h4>
+                    <p data-zh="單手能搞定的事，何必動用兩隻手？左手留在被窩裡繼續享受溫暖、繼續拿著咖啡；右手只需在觸控板邊緣輕輕一劃，瞬間完成複製與貼上。流暢、舒適、毫不妥協。" 
+                       data-en="If a task can be done with one hand, why demand two? Keep your left hand warm under the blanket or enjoy your coffee. Swipe your right hand on the trackpad edge to copy & paste instantly. Pure comfort.">
+                       單手能搞定的事，何必動用兩隻手？左手留在被窩裡繼續享受溫暖、繼續拿著咖啡；右手只需在觸控板邊緣輕輕一劃，瞬間完成複製與貼上。流暢、舒適、毫不妥協。
+                    </p>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- 核心功能特點 -->
