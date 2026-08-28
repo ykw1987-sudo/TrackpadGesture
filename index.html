@@ -506,17 +506,30 @@
 
     <!-- 切換語言腳本 -->
     <script>
-        let currentLang = 'zh';
+    let currentLang = 'zh';
 
-        function toggleLanguage() {
-            currentLang = currentLang === 'zh' ? 'en' : 'zh';
-            document.getElementById('langBtn').innerText = currentLang === 'zh' ? 'English' : '中文';
-            
-            const elements = document.querySelectorAll('[data-zh]');
-            elements.forEach(el => {
-                el.innerHTML = el.getAttribute(`data-${currentLang}`);
-            });
+    function setLanguage(lang) {
+        currentLang = lang;
+        document.getElementById('langBtn').innerText = currentLang === 'zh' ? 'English' : '中文';
+        
+        const elements = document.querySelectorAll('[data-zh]');
+        elements.forEach(el => {
+            el.innerHTML = el.getAttribute(`data-${currentLang}`);
+        });
+    }
+
+    function toggleLanguage() {
+        setLanguage(currentLang === 'zh' ? 'en' : 'zh');
+    }
+
+    // 自動偵測使用者瀏覽器語言
+    window.addEventListener('DOMContentLoaded', () => {
+        const userLang = navigator.language || navigator.userLanguage;
+        // 如果瀏覽器語言不是以 zh (繁中/簡中) 開頭，預設自動切換為英文
+        if (!userLang.startsWith('zh')) {
+            setLanguage('en');
         }
+    });
     </script>
 </body>
 </html>
