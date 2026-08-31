@@ -116,11 +116,29 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .hero p {
+        .hero p.hero-desc {
             font-size: 1.35rem;
             color: var(--text-secondary);
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             font-weight: 400;
+        }
+
+        /* Hero 區域內影片樣式 */
+        .hero-video-wrapper {
+            width: 100%;
+            max-width: 720px;
+            margin: 0 auto 2.5rem;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            background-color: #000;
+        }
+
+        .demo-video {
+            width: 100%;
+            height: auto;
+            display: block;
         }
 
         .cta-buttons {
@@ -279,7 +297,7 @@
             line-height: 1.6;
         }
 
-        /* UI 手勢展示卡片與影片播放器 */
+        /* UI 手勢展示卡片 */
         .demo-box {
             background: linear-gradient(145deg, #18181a, #0d0d0e);
             border: 1px solid var(--border-color);
@@ -292,28 +310,11 @@
             text-align: center;
         }
 
-        .video-wrapper {
-            width: 100%;
-            max-width: 720px;
-            margin: 1.5rem 0 2rem;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
-            border: 1px solid var(--border-color);
-            background-color: #000;
-        }
-
-        .demo-video {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
         .gesture-demo {
             display: flex;
             gap: 3rem;
             justify-content: center;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
             flex-wrap: wrap;
         }
 
@@ -390,7 +391,7 @@
         @media (max-width: 768px) {
             .hero { padding-top: 120px; }
             .hero h1 { font-size: 2.5rem; }
-            .hero p { font-size: 1.1rem; }
+            .hero p.hero-desc { font-size: 1.1rem; }
             .cta-buttons { flex-direction: column; width: 100%; }
             .btn { width: 100%; }
             .story-grid { grid-template-columns: 1fr; }
@@ -415,8 +416,17 @@
     <section class="hero">
         <div class="hero-badge" data-zh="專為 macOS 精心打造" data-en="Crafted for macOS">專為 macOS 精心打造</div>
         <h1 data-zh="讓你的 Mac 觸控板<br>極速進化" data-en="Elevate Your Mac<br>Trackpad Experience">讓你的 Mac 觸控板<br>極速進化</h1>
-        <p data-zh="只需雙指邊緣滑動，無縫觸發複製與貼上。解放你的工作流程。" data-en="Seamlessly copy and paste with intuitive edge gestures. Streamline your workflow instantly.">只需雙指邊緣滑動，無縫觸發複製與貼上。解放你的工作流程。</p>
+        <p class="hero-desc" data-zh="只需雙指邊緣滑動，無縫觸發複製與貼上。解放你的工作流程。" data-en="Seamlessly copy and paste with intuitive edge gestures. Streamline your workflow instantly.">只需雙指邊緣滑動，無縫觸發複製與貼上。解放你的工作流程。</p>
         
+        <!-- 放置於文案下方、按鈕上方的影片展示區域 -->
+        <div class="hero-video-wrapper">
+            <video class="demo-video" autoplay loop muted playsinline controls>
+                <source src="https://ykw1987-sudo.github.io/TrackpadGesture/Final%20Version.mov" type="video/quicktime">
+                <source src="https://ykw1987-sudo.github.io/TrackpadGesture/Final%20Version.mov" type="video/mp4">
+                <span data-zh="您的瀏覽器不支援此影片格式。" data-en="Your browser does not support the video tag.">您的瀏覽器不支援此影片格式。</span>
+            </video>
+        </div>
+
         <div class="cta-buttons">
             <a href="https://github.com/ykw1987-sudo/TrackpadGesture/releases/download/v1.0.0/TrackpadGesture.dmg" class="btn btn-primary" data-zh="免費下載（試用 45 天）" data-en="Free Download (45-Day Trial)">免費下載（試用 45 天）</a>
             <a href="https://checkout.dodopayments.com/buy/pdt_0NmNnyLajCMVsGdCdXcnQ?quantity=1" class="btn btn-secondary" data-zh="立即購買授權" data-en="Buy License Now">立即購買授權</a>
@@ -479,21 +489,10 @@
             </div>
         </div>
 
-        <!-- 手勢示範展示區與 Demo 影片 -->
+        <!-- 手勢示範解說卡片 -->
         <div class="demo-box">
-            <h3 style="font-size: 1.5rem; font-weight: 600;" data-zh="如何使用 TrackpadGesture" data-en="How It Works">如何使用 TrackpadGesture</h3>
-            <p style="color: var(--text-secondary); margin-top: 8px;" data-zh="觀看實際操作示範影片：" data-en="Watch the action demo video:">觀看實際操作示範影片：</p>
-            
-            <!-- 影片展示區域 (已更新指定線上影片網址) -->
-            <div class="video-wrapper">
-                <video class="demo-video" autoplay loop muted playsinline controls>
-                    <source src="https://ykw1987-sudo.github.io/TrackpadGesture/Final%20Version.mov" type="video/quicktime">
-                    <source src="https://ykw1987-sudo.github.io/TrackpadGesture/Final%20Version.mov" type="video/mp4">
-                    <span data-zh="您的瀏覽器不支援此影片格式。" data-en="Your browser does not support the video tag.">您的瀏覽器不支援此影片格式。</span>
-                </video>
-            </div>
-
-            <p style="color: var(--text-secondary);" data-zh="將雙指移動至觸控板最右側區域並滑動：" data-en="Move two fingers to the far right side of the trackpad:">將雙指移動至觸控板最右側區域並滑動：</p>
+            <h3 style="font-size: 1.5rem; font-weight: 600;" data-zh="手勢操作對照" data-en="How It Works">手勢操作對照</h3>
+            <p style="color: var(--text-secondary); margin-top: 8px;" data-zh="將雙指移動至觸控板最右側區域並滑動：" data-en="Move two fingers to the far right side of the trackpad:">將雙指移動至觸控板最右側區域並滑動：</p>
             
             <div class="gesture-demo">
                 <div class="gesture-item">
