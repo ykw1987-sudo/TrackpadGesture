@@ -522,11 +522,18 @@
     function setLanguage(lang) {
         currentLang = lang;
         document.documentElement.lang = lang === 'zh' ? 'zh-Hant' : 'en';
-        document.getElementById('langBtn').innerText = currentLang === 'zh' ? 'English' : '中文';
         
-        const elements = document.querySelectorAll('[data-zh]');
+        const langBtn = document.getElementById('langBtn');
+        if (langBtn) {
+            langBtn.innerText = currentLang === 'zh' ? 'English' : '中文';
+        }
+        
+        const elements = document.querySelectorAll('[data-zh][data-en]');
         elements.forEach(el => {
-            el.innerHTML = el.getAttribute(`data-${currentLang}`);
+            const targetText = el.getAttribute(`data-${currentLang}`);
+            if (targetText !== null) {
+                el.innerHTML = targetText;
+            }
         });
     }
 
@@ -536,8 +543,8 @@
 
     // 自動偵測使用者瀏覽器語言
     window.addEventListener('DOMContentLoaded', () => {
-        const userLang = navigator.language || navigator.userLanguage;
-        if (!userLang.startsWith('zh')) {
+        const userLang = navigator.language || navigator.userLanguage || '';
+        if (!userLang.toLowerCase().startsWith('zh')) {
             setLanguage('en');
         }
     });
