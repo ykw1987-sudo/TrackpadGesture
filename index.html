@@ -279,7 +279,7 @@
             line-height: 1.6;
         }
 
-        /* UI 手勢展示卡片 */
+        /* UI 手勢展示卡片與影片播放器 */
         .demo-box {
             background: linear-gradient(145deg, #18181a, #0d0d0e);
             border: 1px solid var(--border-color);
@@ -292,11 +292,28 @@
             text-align: center;
         }
 
+        .video-wrapper {
+            width: 100%;
+            max-width: 720px;
+            margin: 1.5rem 0 2rem;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            background-color: #000;
+        }
+
+        .demo-video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
         .gesture-demo {
             display: flex;
             gap: 3rem;
             justify-content: center;
-            margin-top: 2rem;
+            margin-top: 1rem;
             flex-wrap: wrap;
         }
 
@@ -377,6 +394,7 @@
             .cta-buttons { flex-direction: column; width: 100%; }
             .btn { width: 100%; }
             .story-grid { grid-template-columns: 1fr; }
+            .demo-box { padding: 2rem 1rem; }
         }
     </style>
 </head>
@@ -418,7 +436,7 @@
                     <h3 data-zh="🥶 以前：雙手繁瑣操作" data-en="🥶 Before: Clumsy Two-Handed Moves">🥶 以前：雙手繁瑣操作</h3>
                     <p data-zh="冬天窩在沙發或被窩看資料，右手滑著觸控板。但每當要複製貼上，左手就必須被逼抽出溫暖的被窩去按 ⌘+C / ⌘+V；或是左手拿著熱咖啡時，操作瞬間被中斷。" 
                        data-en="Curled up in bed on a chilly night? Every time you copy text, you're forced to pull your warm left hand out into the cold air just to hit Cmd+C / Cmd+V. Holding a coffee? Operations halt completely.">
-                       冬天窩在沙發或被窩看資料，右手滑著觸控板。但每當要複製貼上，左手就必須被逼抽出溫暖的被窩去按 ⌘+C / ⌘+V；或是左手拿著熱咖啡時，操作瞬間被中斷。
+                        冬天窩在沙發或被窩看資料，右手滑著觸控板。但每當要複製貼上，左手就必須被逼抽出溫暖的被窩去按 ⌘+C / ⌘+V；或是左手拿著熱咖啡時，操作瞬間被中斷。
                     </p>
                 </div>
                 
@@ -427,7 +445,7 @@
                     <h3 data-zh="🔥 現在：極致單手掌控" data-en="🔥 Now: Seamless Single-Hand Control">🔥 現在：極致單手掌控</h3>
                     <p data-zh="單手能搞定的事，何必動用兩隻手？左手留在被窩裡繼續享受溫暖、繼續拿著咖啡；右手只需在觸控板邊緣輕輕一劃，瞬間完成複製與貼上。流暢、舒適、毫不妥協。" 
                        data-en="If a task can be done with one hand, why demand two? Keep your left hand warm under the blanket or enjoy your coffee. Swipe your right hand on the trackpad edge to copy & paste instantly. Pure comfort.">
-                       單手能搞定的事，何必動用兩隻手？左手留在被窩裡繼續享受溫暖、繼續拿著咖啡；右手只需在觸控板邊緣輕輕一劃，瞬間完成複製與貼上。流暢、舒適、毫不妥協。
+                        單手能搞定的事，何必動用兩隻手？左手留在被窩裡繼續享受溫暖、繼續拿著咖啡；右手只需在觸控板邊緣輕輕一劃，瞬間完成複製與貼上。流暢、舒適、毫不妥協。
                     </p>
                 </div>
             </div>
@@ -456,15 +474,26 @@
             </div>
             <div class="card">
                 <div class="card-icon">🛡️</div>
-                <h3 data-zh="防誤觸與智能凍結" data-en="Smart Scroll Suppression">防誤觸與智能凍結</h3>
+                <h3 data-zh="防誤觸與智能凍結" data-en="Smart Scroll Suppression">防误觸與智能凍結</h3>
                 <p data-zh="內建 Multitouch 私有底層框架優化，觸發手勢時自動壓制網頁滾動，離開左側 zone 瞬間即時解凍。" data-en="Prevents unwanted page scrolling during gesture execution with real-time zone detection logic.">內建 Multitouch 私有底層框架優化，觸發手勢時自動壓制網頁滾動，離開左側 zone 瞬間即時解凍。</p>
             </div>
         </div>
 
-        <!-- 手勢示範展示區 -->
+        <!-- 手勢示範展示區與 Demo 影片 -->
         <div class="demo-box">
             <h3 style="font-size: 1.5rem; font-weight: 600;" data-zh="如何使用 TrackpadGesture" data-en="How It Works">如何使用 TrackpadGesture</h3>
-            <p style="color: var(--text-secondary); margin-top: 8px;" data-zh="將雙指移動至觸控板最右側區域並滑動：" data-en="Move two fingers to the far right side of the trackpad:">將雙指移動至觸控板最右側區域並滑動：</p>
+            <p style="color: var(--text-secondary); margin-top: 8px;" data-zh="觀看實際操作示範影片：" data-en="Watch the action demo video:">觀看實際操作示範影片：</p>
+            
+            <!-- 影片展示區域 (已更新指定線上影片網址) -->
+            <div class="video-wrapper">
+                <video class="demo-video" autoplay loop muted playsinline controls>
+                    <source src="https://ykw1987-sudo.github.io/TrackpadGesture/Final%20Version.mov" type="video/quicktime">
+                    <source src="https://ykw1987-sudo.github.io/TrackpadGesture/Final%20Version.mov" type="video/mp4">
+                    <span data-zh="您的瀏覽器不支援此影片格式。" data-en="Your browser does not support the video tag.">您的瀏覽器不支援此影片格式。</span>
+                </video>
+            </div>
+
+            <p style="color: var(--text-secondary);" data-zh="將雙指移動至觸控板最右側區域並滑動：" data-en="Move two fingers to the far right side of the trackpad:">將雙指移動至觸控板最右側區域並滑動：</p>
             
             <div class="gesture-demo">
                 <div class="gesture-item">
@@ -522,18 +551,11 @@
     function setLanguage(lang) {
         currentLang = lang;
         document.documentElement.lang = lang === 'zh' ? 'zh-Hant' : 'en';
+        document.getElementById('langBtn').innerText = currentLang === 'zh' ? 'English' : '中文';
         
-        const langBtn = document.getElementById('langBtn');
-        if (langBtn) {
-            langBtn.innerText = currentLang === 'zh' ? 'English' : '中文';
-        }
-        
-        const elements = document.querySelectorAll('[data-zh][data-en]');
+        const elements = document.querySelectorAll('[data-zh]');
         elements.forEach(el => {
-            const targetText = el.getAttribute(`data-${currentLang}`);
-            if (targetText !== null) {
-                el.innerHTML = targetText;
-            }
+            el.innerHTML = el.getAttribute(`data-${currentLang}`);
         });
     }
 
@@ -543,8 +565,8 @@
 
     // 自動偵測使用者瀏覽器語言
     window.addEventListener('DOMContentLoaded', () => {
-        const userLang = navigator.language || navigator.userLanguage || '';
-        if (!userLang.toLowerCase().startsWith('zh')) {
+        const userLang = navigator.language || navigator.userLanguage;
+        if (!userLang.startsWith('zh')) {
             setLanguage('en');
         }
     });
